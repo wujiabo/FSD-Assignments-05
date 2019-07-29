@@ -1,6 +1,6 @@
 package com.wujiabo.fsd.controller;
 
-import com.xueqing.demo.springbootsecurity.security.SecurityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginController {
     @PostMapping(value = "/logout")
     public String logout() {
-        SecurityUtils.logout();
+        SecurityContextHolder.clearContext();
         return "redirect:login";
     }
 
