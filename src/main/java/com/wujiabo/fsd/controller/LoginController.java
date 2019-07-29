@@ -18,9 +18,24 @@ public class LoginController {
         return "hello";
     }
 
-    @GetMapping(value = "/register")
+    @PostMapping(value = "/register")
     public String register() {
+        return "login";
+    }
+
+    @GetMapping(value = "/register")
+    public String toRegister() {
         return "register";
+    }
+
+    @PostMapping(value = "/modify")
+    public String modify() {
+        return "modify";
+    }
+
+    @GetMapping(value = "/modify")
+    public String toModify() {
+        return "modify";
     }
 
     @GetMapping(value = "/login")
