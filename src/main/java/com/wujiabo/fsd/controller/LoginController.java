@@ -18,6 +18,11 @@ public class LoginController {
         return "hello";
     }
 
+    @GetMapping(value = "/register")
+    public String register() {
+        return "register";
+    }
+
     @GetMapping(value = "/login")
     public String login() {
         return "login";
