@@ -43,7 +43,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/register")
-    public String register(@ModelAttribute SysUser sysUser, Model model) {
+    public String register(@ModelAttribute SysUser sysUser, Model model,HttpServletRequest request) {
         if(StringUtils.isEmpty(sysUser.getUsername())){
             throw new FSDException("username is empty");
         }
@@ -55,6 +55,10 @@ public class LoginController {
         }
         if(StringUtils.isEmpty(sysUser.getPassword())){
             throw new FSDException("new password is empty");
+        }
+        String s = request.getSession().getAttribute("CHECK_CODE").toString();
+        if (StringUtils.isEmpty(sysUser.getKaptcha()) || !s.equals(sysUser.getKaptcha())) {
+            throw new FSDException("kaptcha is incorrect");
         }
 
         SysUser existUser = userService.loadUserByUsername(sysUser.getUsername());

@@ -34,6 +34,14 @@
             </td>
         </tr>
         <tr>
+            <td>
+                <img th:src="@{/captcha.jpg}" style="width: 100px;" onclick="refresh(this)" >
+            </td>
+            <td>
+                <input type="text" th:field="*{kaptcha}"/>
+            </td>
+        </tr>
+        <tr>
             <td><input type="submit" value="Register"/>
             </td>
             <td><input type="button" value="Reset" onclick="reset()"/>
@@ -42,11 +50,8 @@
     </table>
 </form>
 <script>
-    function reset(){
-        document.getElementsById('username') = '';
-        document.getElementsById('password') = '';
-        document.getElementsById('user') = '';
-        document.getElementsById('email') = '';
+    function refresh(obj) {
+        obj.src = "captcha.jpg?t=" + new Date().getMilliseconds();
     }
 </script>
 </body>

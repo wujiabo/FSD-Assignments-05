@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <td>
-                <img th:src="@{/captcha.jpg}" onclick="refresh(this)" >
+                <img th:src="@{/captcha.jpg}" style="width: 100px;" onclick="refresh(this)" >
             </td>
             <td>
                 <input type="text" name="kaptcha"/>
@@ -46,5 +46,10 @@
         </tr>
     </table>
 </form>
+<script>
+    function refresh(obj) {
+        obj.src = "captcha.jpg?t=" + new Date().getMilliseconds();
+    }
+</script>
 </body>
 </html>
