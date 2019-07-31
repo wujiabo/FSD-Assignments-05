@@ -31,6 +31,14 @@
         </tr>
         <tr>
             <td>
+                <img th:src="@{/captcha.jpg}" onclick="refresh(this)" >
+            </td>
+            <td>
+                <input type="text" name="kaptcha"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <input type="submit" value="Sign In"/>
             </td>
             <td><a th:href="@{/register}">register</a>

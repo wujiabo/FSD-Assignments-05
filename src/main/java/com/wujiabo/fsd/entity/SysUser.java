@@ -16,6 +16,7 @@ public class SysUser implements UserDetails, Serializable {
     private String email;
     private String oldPassword;
     private String newPassword;
+    private String kaptcha;
     private List<? extends GrantedAuthority> authorities;
 
     public String getUsername() {
@@ -93,5 +94,13 @@ public class SysUser implements UserDetails, Serializable {
 
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+
+    public String getKaptcha() {
+        return kaptcha;
+    }
+
+    public void setKaptcha(String kaptcha) {
+        this.kaptcha = kaptcha;
     }
 }
