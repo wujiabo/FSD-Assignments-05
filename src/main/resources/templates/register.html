@@ -36,10 +36,18 @@
         <tr>
             <td><input type="submit" value="Register"/>
             </td>
-            <td><input type="button" value="Reset"/>
+            <td><input type="button" value="Reset" onclick="reset()"/>
             </td>
         </tr>
     </table>
 </form>
+<script>
+    function reset(){
+        document.getElementsById('username') = '';
+        document.getElementsById('password') = '';
+        document.getElementsById('user') = '';
+        document.getElementsById('email') = '';
+    }
+</script>
 </body>
 </html>
