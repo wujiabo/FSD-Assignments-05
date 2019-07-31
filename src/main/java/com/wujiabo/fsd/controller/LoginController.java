@@ -1,6 +1,7 @@
 package com.wujiabo.fsd.controller;
 
 import com.wujiabo.fsd.entity.SysUser;
+import com.wujiabo.fsd.exception.FSDException;
 import com.wujiabo.fsd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.thymeleaf.util.StringUtils;
 
 import javax.validation.Valid;
 
@@ -33,6 +35,27 @@ public class LoginController {
 
     @PostMapping(value = "/register")
     public String register(@ModelAttribute SysUser sysUser, Model model) {
+        if(StringUtils.isEmpty(sysUser.getUsername())){
+            throw new FSDException("username is empty");
+        }
+        if(StringUtils.isEmpty(sysUser.getEmail())){
+            throw new FSDException("email is empty");
+        }
+        if(StringUtils.isEmpty(sysUser.getName())){
+            throw new FSDException("name is empty");
+        }
+        if(StringUtils.isEmpty(sysUser.getPassword())){
+            throw new FSDException("new password is empty");
+        }
+
+        SysUser existUser = userService.loadUserByUsername(sysUser.getUsername());
+        if(existUser != null){
+            throw new FSDException("username is exist");
+        }
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+        userService.register(sysUser);
         model.addAttribute("msg","register successful");
         return "register";
     }
@@ -44,11 +67,20 @@ public class LoginController {
     }
 
     @PostMapping(value = "/modify")
-    public String modify(@ModelAttribute @Valid SysUser sysUser, Model model) {
+    public String modify(@ModelAttribute SysUser sysUser, Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
         SysUser _sysUser = userService.loadUserByUsername(userDetails.getUsername());
+        if(StringUtils.isEmpty(sysUser.getEmail())){
+            throw new FSDException("email is empty");
+        }
+        if(StringUtils.isEmpty(sysUser.getName())){
+            throw new FSDException("name is empty");
+        }
+        if(StringUtils.isEmpty(sysUser.getNewPassword())){
+            throw new FSDException("new password is empty");
+        }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         _sysUser.setEmail(sysUser.getEmail());

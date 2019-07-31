@@ -23,4 +23,9 @@ public class UserServiceImpl implements UserService {
         userMapper.update(sysUser);
     }
 
+    @Override
+    public void register(SysUser sysUser) {
+        userMapper.insert(sysUser);
+    }
+
 }

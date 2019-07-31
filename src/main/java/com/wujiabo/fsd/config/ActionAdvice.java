@@ -1,5 +1,6 @@
 package com.wujiabo.fsd.config;
 
+import com.wujiabo.fsd.exception.FSDException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -11,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ActionAdvice {
-    @ExceptionHandler(BindException.class)
-    public ModelAndView bindExceptionHandler(BindException ex) {
+    @ExceptionHandler(FSDException.class)
+    public ModelAndView bindFSDExceptionHandler(FSDException ex) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("error");
-        mv.addObject("msg", "field is empty");
+        mv.addObject("msg", ex.getMessage());
         return mv;
     }
 }
