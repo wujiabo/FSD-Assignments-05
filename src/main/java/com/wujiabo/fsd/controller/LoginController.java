@@ -45,25 +45,31 @@ public class LoginController {
     @PostMapping(value = "/register")
     public String register(@ModelAttribute SysUser sysUser, Model model,HttpServletRequest request) {
         if(StringUtils.isEmpty(sysUser.getUsername())){
-            throw new FSDException("username is empty");
+            model.addAttribute("msg","username is empty");
+            return "register";
         }
         if(StringUtils.isEmpty(sysUser.getEmail())){
-            throw new FSDException("email is empty");
+            model.addAttribute("msg","email is empty");
+            return "register";
         }
         if(StringUtils.isEmpty(sysUser.getName())){
-            throw new FSDException("name is empty");
+            model.addAttribute("msg","name is empty");
+            return "register";
         }
         if(StringUtils.isEmpty(sysUser.getPassword())){
-            throw new FSDException("new password is empty");
+            model.addAttribute("msg","new password is empty");
+            return "register";
         }
         String s = request.getSession().getAttribute("CHECK_CODE").toString();
         if (StringUtils.isEmpty(sysUser.getKaptcha()) || !s.equals(sysUser.getKaptcha())) {
-            throw new FSDException("kaptcha is incorrect");
+            model.addAttribute("msg","kaptcha is incorrect");
+            return "register";
         }
 
         SysUser existUser = userService.loadUserByUsername(sysUser.getUsername());
         if(existUser != null){
-            throw new FSDException("username is exist");
+            model.addAttribute("msg","username is exist");
+            return "register";
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -86,18 +92,26 @@ public class LoginController {
                 .getPrincipal();
         SysUser _sysUser = userService.loadUserByUsername(userDetails.getUsername());
         if(StringUtils.isEmpty(sysUser.getEmail())){
-            throw new FSDException("email is empty");
+            model.addAttribute("msg","email is empty");
+            model.addAttribute("sysUser",userService.loadUserByUsername(userDetails.getUsername()));
+            return "modify";
         }
         if(StringUtils.isEmpty(sysUser.getName())){
-            throw new FSDException("name is empty");
+            model.addAttribute("msg","name is empty");
+            model.addAttribute("sysUser",userService.loadUserByUsername(userDetails.getUsername()));
+            return "modify";
         }
         if(StringUtils.isEmpty(sysUser.getNewPassword())){
-            throw new FSDException("new password is empty");
+            model.addAttribute("msg","new password is empty");
+            model.addAttribute("sysUser",userService.loadUserByUsername(userDetails.getUsername()));
+            return "modify";
         }
 
         String s = request.getSession().getAttribute("CHECK_CODE").toString();
         if (StringUtils.isEmpty(sysUser.getKaptcha()) || !s.equals(sysUser.getKaptcha())) {
-            throw new FSDException("kaptcha is incorrect");
+            model.addAttribute("msg","kaptcha is incorrect");
+            model.addAttribute("sysUser",userService.loadUserByUsername(userDetails.getUsername()));
+            return "modify";
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
