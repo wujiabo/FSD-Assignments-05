@@ -32,9 +32,11 @@ public class KaptchaAuthenticationFilter extends AbstractAuthenticationProcessin
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        req.getSession().setAttribute("msg", null);
         if ("POST".equalsIgnoreCase(req.getMethod()) && servletPath.equals(req.getServletPath())) {
             String expect = (String) req.getSession().getAttribute("CHECK_CODE");
             if (expect != null && !expect.equalsIgnoreCase(req.getParameter("kaptcha"))) {
+                req.getSession().setAttribute("msg", "kaptcha is incorrect");
                 unsuccessfulAuthentication(req, res, new InsufficientAuthenticationException("kaptcha is incorrect"));
                 return;
             }
