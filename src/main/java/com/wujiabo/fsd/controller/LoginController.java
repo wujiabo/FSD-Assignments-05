@@ -34,7 +34,7 @@ public class LoginController {
     @PostMapping(value = "/register")
     public String register(@ModelAttribute SysUser sysUser, Model model) {
         model.addAttribute("msg","register successful");
-        return "login";
+        return "register";
     }
 
     @GetMapping(value = "/register")

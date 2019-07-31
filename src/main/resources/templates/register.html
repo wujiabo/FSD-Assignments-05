@@ -5,8 +5,7 @@
     <title>register</title>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div th:text="${msg}">
 </div>
 <form th:action="@{/register}" th:object="${sysUser}" method="post">
     <div><label> Username : <input type="text" th:field="*{username}"/> </label></div>
