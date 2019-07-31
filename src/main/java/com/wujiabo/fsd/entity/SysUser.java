@@ -8,10 +8,14 @@ import java.util.Collection;
 import java.util.List;
 
 public class SysUser implements UserDetails, Serializable {
+    private static final long serialVersionUID = 4359709211352400087L;
+
     private String username;
     private String password;
     private String name;
     private String email;
+    private String oldPassword;
+    private String newPassword;
     private List<? extends GrantedAuthority> authorities;
 
     public String getUsername() {
@@ -73,5 +77,21 @@ public class SysUser implements UserDetails, Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 }
