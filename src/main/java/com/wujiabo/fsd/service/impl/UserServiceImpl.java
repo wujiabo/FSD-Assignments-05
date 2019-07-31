@@ -19,7 +19,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<SysUser> getAllUsers() {
-        return userMapper.findAll();
+    public void updateUser(SysUser sysUser) {
+        userMapper.update(sysUser);
     }
+
 }

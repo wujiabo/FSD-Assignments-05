@@ -8,5 +8,5 @@ public interface UserService  {
 
      SysUser loadUserByUsername(String username);
 
-     List<SysUser> getAllUsers();
+    void updateUser(SysUser sysUser);
 }
