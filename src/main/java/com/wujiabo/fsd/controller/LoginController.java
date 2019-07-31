@@ -26,9 +26,9 @@ public class LoginController {
         return "redirect:login";
     }
 
-    @GetMapping(value = "/hello")
-    public String hello() {
-        return "hello";
+    @GetMapping(value = "/index")
+    public String index() {
+        return "index";
     }
 
     @PostMapping(value = "/register")
