@@ -3,6 +3,8 @@ package com.wujiabo.fsd.entity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -12,9 +14,12 @@ public class SysUser implements UserDetails, Serializable {
 
     private String username;
     private String password;
+    @NotBlank
     private String name;
+    @NotBlank
     private String email;
     private String oldPassword;
+    @NotBlank
     private String newPassword;
     private List<? extends GrantedAuthority> authorities;
 

@@ -11,7 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.thymeleaf.util.StringUtils;
+
+import javax.validation.Valid;
 
 @Controller
 public class LoginController {
@@ -41,23 +42,18 @@ public class LoginController {
     }
 
     @PostMapping(value = "/modify")
-    public String modify(@ModelAttribute SysUser sysUser,Model model) {
+    public String modify(@ModelAttribute @Valid SysUser sysUser, Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
         SysUser _sysUser = userService.loadUserByUsername(userDetails.getUsername());
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(sysUser.getOldPassword());
-        if(!StringUtils.equals(_sysUser.getPassword(),encodedPassword)){
-            model.addAttribute("msg","old password is incorrect");
-        }else{
-            _sysUser.setEmail(sysUser.getEmail());
-            _sysUser.setName(sysUser.getName());
-            _sysUser.setPassword(passwordEncoder.encode(sysUser.getNewPassword()));
-            userService.updateUser(_sysUser);
-            model.addAttribute("msg","modify successful");
-        }
+        _sysUser.setEmail(sysUser.getEmail());
+        _sysUser.setName(sysUser.getName());
+        _sysUser.setPassword(passwordEncoder.encode(sysUser.getNewPassword()));
+        userService.updateUser(_sysUser);
+        model.addAttribute("msg","modify successful");
         model.addAttribute("sysUser",userService.loadUserByUsername(userDetails.getUsername()));
         return "modify";
     }
