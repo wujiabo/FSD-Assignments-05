@@ -13,6 +13,6 @@ public class ActionAdvice {
     @ResponseBody
     @ExceptionHandler(BindException.class)
     public String  bindExceptionHandler(BindException ex) {
-        return ex.getMessage();
+        return "field is empty";
     }
 }
