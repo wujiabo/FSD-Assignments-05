@@ -9,11 +9,38 @@
 </div>
 <h2><a th:href="@{/index}">index</a></h2>
 <form th:action="@{/modify}" th:object="${sysUser}" method="post">
-    <div><label> Username : <input type="text" th:field="*{username}" disabled="true"/> </label></div>
-    <div><label> Name : <input type="text" th:field="*{name}"/> </label></div>
-    <div><label> Email: <input type="text" th:field="*{email}"/> </label></div>
-    <div><label> New Password: <input type="password" th:field="*{newPassword}"/> </label></div>
-    <div><input type="submit" value="Update"/></div>
+    <table>
+        <tr>
+            <td>Username :
+            </td>
+            <td><input type="text" th:field="*{username}" disabled="true"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Name :
+            </td>
+            <td><input type="text" th:field="*{name}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:
+            </td>
+            <td><input type="text" th:field="*{email}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>New Password:
+            </td>
+            <td><input type="password" th:field="*{newPassword}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Update"/>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
