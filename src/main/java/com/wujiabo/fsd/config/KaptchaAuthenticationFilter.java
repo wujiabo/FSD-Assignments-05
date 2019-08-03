@@ -1,9 +1,6 @@
 package com.wujiabo.fsd.config;
 
-import com.google.code.kaptcha.Constants;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;

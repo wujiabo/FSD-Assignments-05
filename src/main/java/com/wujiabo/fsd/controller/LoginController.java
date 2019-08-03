@@ -2,7 +2,6 @@ package com.wujiabo.fsd.controller;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.wujiabo.fsd.entity.SysUser;
-import com.wujiabo.fsd.exception.FSDException;
 import com.wujiabo.fsd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +18,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -150,11 +148,8 @@ public class LoginController {
     public void applyCheckCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
-        //生成文字验证码
         String text = defaultKaptcha.createText();
-        //生成图片验证码
         BufferedImage image = defaultKaptcha.createImage(text);
-        //保存到session
         request.getSession().setAttribute("CHECK_CODE", text);
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(image, "jpg", out);
