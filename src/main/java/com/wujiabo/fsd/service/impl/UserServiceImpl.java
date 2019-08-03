@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(SysUser sysUser) {
-        sysUser.setRole("user");
+        sysUser.setRole("ROLE_user");
         userMapper.insert(sysUser);
     }
 
