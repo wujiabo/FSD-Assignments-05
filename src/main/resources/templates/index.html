@@ -6,7 +6,7 @@
     </head>
     <body>
     <a th:href="@{/modify}">Modify User : [[${#httpServletRequest.remoteUser}]]</a><br/>
-    <a th:href="@{/admin/rest}">rest</a><br/>
+    <a th:href="@{/admin/info}">info for admin</a><br/>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form>

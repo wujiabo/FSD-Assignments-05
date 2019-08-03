@@ -140,9 +140,9 @@ public class LoginController {
     }
 
 
-    @GetMapping(value = "/admin/rest")
+    @GetMapping(value = "/admin/info")
     public String rest() {
-        return "rest";
+        return "info";
     }
 
 
