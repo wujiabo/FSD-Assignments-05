@@ -22,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new KaptchaAuthenticationFilter("/login"), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
                 .antMatchers("/", "/register","/captcha.jpg").permitAll()
+                .antMatchers("/admin/**").hasRole("admin")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

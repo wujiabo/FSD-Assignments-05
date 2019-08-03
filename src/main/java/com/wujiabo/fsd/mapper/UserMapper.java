@@ -17,7 +17,7 @@ public interface UserMapper {
     @Delete("DELETE FROM sysuser WHERE username = #{username}")
     public int deleteByUsername(String username);
 
-    @Insert("INSERT INTO sysuser(username, password,name,email) VALUES (#{username}, #{password}, #{name}, #{email})")
+    @Insert("INSERT INTO sysuser(username, password,name,email,role) VALUES (#{username}, #{password}, #{name}, #{email}, #{role})")
     public int insert(SysUser sysUser);
 
     @Update("Update sysuser set name=#{name}, email=#{email}, password=#{password} where username=#{username}")

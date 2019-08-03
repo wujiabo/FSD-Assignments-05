@@ -140,6 +140,12 @@ public class LoginController {
     }
 
 
+    @GetMapping(value = "/admin/rest")
+    public String rest() {
+        return "rest";
+    }
+
+
     @GetMapping("/captcha.jpg")
     public void applyCheckCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setHeader("Cache-Control", "no-store, no-cache");
