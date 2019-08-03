@@ -141,7 +141,7 @@ public class LoginController {
 
 
     @GetMapping(value = "/admin/info")
-    public String rest() {
+    public String info() {
         return "info";
     }
 
